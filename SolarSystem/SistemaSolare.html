@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Sistema Solare</title>
+    <style>
+        body {
+            background: black;
+			overflow: hidden;
+        }
+		
+		.star {
+			position: absolute;
+			width: 2px;
+			height: 2px;
+			background: white;
+			border-radius: 50%;
+			animation: twinkle var(--duration) infinite;
+			opacity: var(--opacity); /* Aggiungiamo un'opacità personalizzata */
+		}
+		
+		/* Animazione di lampeggio delle stelle */
+		@keyframes twinkle {
+			0% { opacity: var(--min-opacity); } /* Opacità minima */
+			50% { opacity: var(--max-opacity); } /* Opacità massima */
+			100% { opacity: var(--min-opacity); } /* Opacità minima */
+		}
+
+        .sun {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            border-radius: 50%;
+            position: absolute;
+            top: calc(50% - 50px);
+            left: calc(50% - 50px);
+            z-index: 2;
+        }
+
+        /* Stile per l'orbita Mercury */
+        .orbit-mercury {
+            width: 200px;
+            height: 200px;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            position: absolute;
+            top: calc(50% - 100px);
+            left: calc(50% - 100px);
+            z-index: 1;
+        }
+
+        .orbit-venus {
+			width: 300px;
+			height: 300px;
+			border: 1px dashed rgba(255, 255, 255, 0.2);
+			border-radius: 50%;
+			position: absolute;
+			top: calc(50% - 150px);
+			left: calc(50% - 150px);
+			z-index: 1;
+		}
+
+        .orbit-earth {
+            width: 400px;
+            height: 400px;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            position: absolute;
+            top: calc(50% - 200px);
+            left: calc(50% - 200px);
+            z-index: 1;
+        }
+
+        .orbit-mars{
+            width: 500px;
+            height: 500px;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            position: absolute;
+            top: calc(50% - 250px);
+            left: calc(50% - 250px);
+            z-index: 1;
+        }
+
+        .orbit-jupiter{
+            width: 600px;
+            height: 600px;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            position: absolute;
+            top: calc(50% - 300px);
+            left: calc(50% - 300px);
+            z-index: 1;
+        }
+
+        .orbit-saturn{
+            width: 750px;
+            height: 750px;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            position: absolute;
+            top: calc(50% - 375px);
+            left: calc(50% - 375px);
+            z-index: 1;
+        }
+
+        .orbit-uran{
+            width: 900px;
+            height: 900px;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            position: absolute;
+            top: calc(50% - 450px);
+            left: calc(50% - 450px);
+            z-index: 1;
+        }
+
+        .orbit-neptun{
+            width: 1000px;
+            height: 1000px;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            position: absolute;
+            top: calc(50% - 500px);
+            left: calc(50% - 500px);
+            z-index: 1;
+        }
+
+        .mercury {
+            width: 3px;
+            height: 3px;
+            background-color: #c5c2c2;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 3;
+        }
+		
+		.venus {
+			width: 7px;
+			height: 7px;
+			background-color: orange;
+			border-radius: 50%;
+			position: absolute;
+			z-index: 3;
+		}
+		
+        .earth {
+            width: 9px;
+            height: 9px;
+            background-color: blue;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 3;
+        }
+
+        .mars{
+            width: 4.7px;
+            height: 4.7px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 3;
+        }
+
+        .jupiter{
+            width: 70px;
+            height: 70px;
+            background-color: #FF4500;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 3;
+        }
+
+        .saturn{
+            width: 50px;
+            height: 50px;
+            background-color: #a17824;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 3;
+        }
+
+        .saturn::before,
+        .saturn::after {
+            content: "";
+            width: 70px; /* Larghezza dell'anello esterno */
+            height: 8px; /* Altezza dell'anello esterno */
+            background-color: #ccc; /* Colore degli anelli (grigio) */
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            z-index: 2; /* Posizioniamo gli anelli sopra il pianeta Saturno */
+            box-shadow: 0 0 0 1px transparent; /* Nascondi qualsiasi ombra */
+        }
+
+        .uran{
+            width: 35px;
+            height: 35px;
+            background-color: #66ccff;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 3;
+        }
+
+        .neptun{
+            width: 30px;
+            height: 30px;
+            background-color: #3366CC;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center mt-5">
+        <div class="sun"></div>
+        <div class="orbit-mercury"></div>
+        <div class="mercury"></div>
+        <div class="orbit-venus"></div>
+        <div class="venus"></div>
+        <div class="orbit-earth"></div>
+        <div class="earth"></div>
+        <div class="orbit-mars"></div>
+        <div class="mars"></div>
+        <div class="orbit-jupiter"></div>
+        <div class="jupiter"></div>
+        <div class="orbit-saturn"></div>
+        <div class="saturn"></div>
+        <div class="orbit-uran"></div>
+        <div class="uran"></div>
+        <div class="orbit-neptun"></div>
+        <div class="neptun"></div>
+    </div>
+    <script>
+        const celestialBodies = [
+            {
+                name: 'earth',
+                element: document.querySelector('.earth'),
+                orbit: document.querySelector('.orbit-earth'),
+                radius: 0.5 * document.querySelector('.orbit-earth').offsetWidth,
+                speed: -1,
+                currentAngle: 0,
+            },
+            {
+                name: 'mercury',
+                element: document.querySelector('.mercury'),
+                orbit: document.querySelector('.orbit-mercury'),
+                radius: 0.5 * document.querySelector('.orbit-mercury').offsetWidth,
+                speed: -3.15,
+                currentAngle: 180,
+            },
+            {
+                name: 'venus',
+                element: document.querySelector('.venus'),
+                orbit: document.querySelector('.orbit-venus'),
+                radius: 0.5 * document.querySelector('.orbit-venus').offsetWidth,
+                speed: -1.33, 
+                currentAngle: 0,
+            },
+            {
+                name: 'mars',
+                element: document.querySelector('.mars'),
+                orbit: document.querySelector('.orbit-mars'),
+                radius: 0.5 * document.querySelector('.orbit-mars').offsetWidth,
+                speed: -0.7, 
+                currentAngle: 0,
+            },
+            {
+                name: 'jupiter',
+                element: document.querySelector('.jupiter'),
+                orbit: document.querySelector('.orbit-jupiter'),
+                radius: 0.5 * document.querySelector('.orbit-jupiter').offsetWidth,
+                speed: -0.4, 
+                currentAngle: 100,
+            },
+            {
+                name: 'saturn',
+                element: document.querySelector('.saturn'),
+                orbit: document.querySelector('.orbit-saturn'),
+                radius: 0.5 * document.querySelector('.orbit-saturn').offsetWidth,
+                speed: -0.2, 
+                currentAngle: 200,
+            },
+            {
+                name: 'uran',
+                element: document.querySelector('.uran'),
+                orbit: document.querySelector('.orbit-uran'),
+                radius: 0.5 * document.querySelector('.orbit-uran').offsetWidth,
+                speed: -0.15, 
+                currentAngle: 250,
+            },
+            {
+                name: 'neptun',
+                element: document.querySelector('.neptun'),
+                orbit: document.querySelector('.orbit-neptun'),
+                radius: 0.5 * document.querySelector('.orbit-neptun').offsetWidth,
+                speed: -0.1, 
+                currentAngle: 0,
+            }
+        ];
+
+        function animateOrbit(body) {
+            const centerX = body.orbit.offsetLeft + body.radius;
+            const centerY = body.orbit.offsetTop + body.radius;
+
+            const x = centerX + body.radius * Math.cos(body.currentAngle * (Math.PI / 180));
+            const y = centerY + body.radius * Math.sin(body.currentAngle * (Math.PI / 180));
+
+            body.element.style.left = x - body.element.offsetWidth / 2 + 'px';
+            body.element.style.top = y - body.element.offsetHeight / 2 + 'px';
+
+            body.currentAngle += body.speed;
+            requestAnimationFrame(() => animateOrbit(body));
+        }
+
+        function generateStars() {
+            const numStars = 100;
+            const minOpacity = 0.2;
+            const maxOpacity = 0.8;
+
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.animationDuration = `${Math.random() * (5 - 2) + 2}s`;
+                star.style.setProperty('--min-opacity', minOpacity);
+                star.style.setProperty('--max-opacity', maxOpacity);
+                star.style.setProperty('--opacity', `${Math.random() * (maxOpacity - minOpacity) + minOpacity}`);
+                star.style.setProperty('--duration', star.style.animationDuration);
+
+                document.body.appendChild(star);
+            }
+        }
+
+        generateStars();
+
+        for (const body of celestialBodies) {
+            animateOrbit(body);
+        }
+    </script>
+</body>
+</html>
